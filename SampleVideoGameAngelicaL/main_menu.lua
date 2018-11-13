@@ -112,7 +112,7 @@ function scene:create( event )
 
             -- Insert the images here
             defaultFile = "Images/Credits Button Unpressed.png",
-            overFile = "Images/Credits Button Pressed.png",
+            overFile = "Images/CreditsButtonPressed.png",
 
             -- When the button is released, call the Credits transition function
             onRelease = CreditsTransition
