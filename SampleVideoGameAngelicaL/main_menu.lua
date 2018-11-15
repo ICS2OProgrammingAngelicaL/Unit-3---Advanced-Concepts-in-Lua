@@ -36,6 +36,7 @@ local bkg_image
 local playButton
 local creditsButton
 
+
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -94,8 +95,8 @@ function scene:create( event )
             y = display.contentHeight*7/8,
 
             -- Insert the images here
-            defaultFile = "Images/Start Button Unpressed.png",
-            overFile = "Images/Start Button Pressed.png",
+            defaultFile = "Images/PlayButtonUnpressed@2x.png",
+            overFile = "Images/PlayButtonPressed@2x.png",
 
             -- When the button is released, call the Level1 screen transition function
             onRelease = Level1ScreenTransition          
@@ -111,7 +112,7 @@ function scene:create( event )
             y = display.contentHeight*7/8,
 
             -- Insert the images here
-            defaultFile = "Images/Credits Button Unpressed.png",
+            defaultFile = "Images/CreditsButtonUnpressed.png",
             overFile = "Images/CreditsButtonPressed.png",
 
             -- When the button is released, call the Credits transition function

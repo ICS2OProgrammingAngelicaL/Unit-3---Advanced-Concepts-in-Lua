@@ -25,6 +25,7 @@ local scene = composer.newScene( sceneName )
 
 -- The local variables for this scene
 local banana
+local Jojo
 local scrollSpeed = 4
 local stop = 0
 
@@ -50,6 +51,13 @@ local function MoveBanana( event )
     StopBanana()
 end
 
+-- This function fades the company logo from being trasparent to being opaque
+local function FadeInName()
+
+    -- Changes the alpha
+    Jojo.alpha = Jojo.alpha + 0.01
+end
+
 -- The function that will go to the main menu 
 local function gotoMainMenu()
     composer.gotoScene( "main_menu" )
@@ -69,15 +77,27 @@ function scene:create( event )
     display.setDefault("background", 154/255, 153/255, 255/255)
 
 
-    -- Insert the beetleship image
-    banana = display.newImageRect("Images/CompanyLogoAngelica@2xCopy.png", 200, 200)
+    -- Insert the banana image
+    banana = display.newImageRect("Images/CompanyLogoAngelica@2xCopy.png",  display.contentWidth/5, display.contentHeight/5 + display.contentHeight/14)
+    -- Inserts the image of the App name
+    Jojo = display.newImageRect("Images/CompanyLogoTextAngelicaCopy@2x.png",display.contentWidth*11/13,display.contentHeight/4+display.contentHeight/20)
 
-    -- set the initial x and y position of the beetleship
-    banana.x = 100
-    banana.y = display.contentHeight/2
+    -- set the initial x and y position of the banana
+    banana.x = display.contentWidth *2/4
+    banana.y = display.contentHeight *3/4
+
+    -- Sets the heighht and width of the company name
+    local JojoWidth = Jojo.width
+    local JojoHeight = Jojo.height
+    -- x and y values of the Company name
+    Jojo.x = display.contentWidth/2
+    Jojo.y = display.contentHeight*3/4
+    -- sets the transparency
+    Jojo.alpha = 0
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( banana )
+    sceneGroup:insert( Jojo )
 
 end -- function scene:create( event )
 
@@ -104,6 +124,7 @@ function scene:show( event )
 
         -- Call the moveBeetleship function as soon as we enter the frame.
         Runtime:addEventListener("enterFrame", MoveBanana)
+        Runtime:addEventListener("enterFrame", FadeInName)
 
         -- Go to the main menu screen after the given time.
         timer.performWithDelay ( 3000, gotoMainMenu)          
