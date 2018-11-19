@@ -26,7 +26,7 @@ local scene = composer.newScene( sceneName )
 -- The local variables for this scene
 local banana
 local Jojo
-local scrollSpeed = 4
+local scrollSpeed = 6
 local stop = 0
 
 --------------------------------------------------------------------------------------------
@@ -35,11 +35,8 @@ local stop = 0
 
 -- The function that moves the beetleship across the screen
 local function StopBanana()
-
-    if (banana.y == display.contentHeight/4) then
-        -- sets the rate of which the banana moves to 0 so it stops
-        scrollSpeed = stop
-    end
+    -- Styops the banana from moving
+    scrollSpeed = stop
 end
 
 -- This function moves the banana displayed
@@ -48,14 +45,14 @@ local function MoveBanana( event )
     -- Add the scroll speed to the banana so it moves vertically
     banana.y = banana.y - scrollSpeed
     -- Calls function StopBanana
-    StopBanana()
+    timer.performWithDelay ( 1400, StopBanana )
 end
 
 -- This function fades the company logo from being trasparent to being opaque
 local function FadeInName()
 
     -- Changes the alpha
-    Jojo.alpha = Jojo.alpha + 0.01
+    Jojo.alpha = Jojo.alpha + 00.02
 end
 
 -- The function that will go to the main menu 
@@ -127,7 +124,7 @@ function scene:show( event )
         Runtime:addEventListener("enterFrame", FadeInName)
 
         -- Go to the main menu screen after the given time.
-        timer.performWithDelay ( 3000, gotoMainMenu)          
+        timer.performWithDelay ( 2300, gotoMainMenu)          
         
     end
 

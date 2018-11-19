@@ -92,7 +92,9 @@ function scene:create( event )
         {   
             -- Set its position on the screen relative to the screen size
             x = display.contentWidth/2,
-            y = display.contentHeight*7/8,
+            y = display.contentHeight*10/13,
+            width = display.contentWidth/4,
+            height = display.contentHeight/3,
 
             -- Insert the images here
             defaultFile = "Images/PlayButtonUnpressed@2x.png",
@@ -108,8 +110,11 @@ function scene:create( event )
     creditsButton = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth*7/8,
-            y = display.contentHeight*7/8,
+            x = display.contentWidth*15/17,
+            y = display.contentHeight*11/13,
+            width = display.contentWidth/5,
+            height = display.contentHeight/4,
+
 
             -- Insert the images here
             defaultFile = "Images/CreditsButtonUnpressed.png",
@@ -120,6 +125,26 @@ function scene:create( event )
         } ) 
     
     -- ADD INSTRUCTIONS BUTTON WIDGET
+
+    -----------------------------------------------------------------------------------------
+
+ -- Creating Credits Button
+    helpButton = widget.newButton( 
+        {
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth*2/17,
+            y = display.contentHeight*11/13,
+            width = display.contentWidth/5,
+            height = display.contentHeight/4,
+
+
+            -- Insert the images here
+            defaultFile = "Images/HelpButtonUnpressed@2x.png",
+            overFile = "Images/HelpButtonPressed@2x.png",
+
+            -- When the button is released, call the Credits transition function
+            onRelease = CreditsTransition
+        } ) 
 
     -----------------------------------------------------------------------------------------
 
