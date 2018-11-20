@@ -31,6 +31,8 @@ local scene = composer.newScene( sceneName )
 -- The local variables for this scene
 local bkg_image
 
+display.setStatusBar(display.HiddenStatusBar)
+
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------

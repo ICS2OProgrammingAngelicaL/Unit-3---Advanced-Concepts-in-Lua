@@ -35,6 +35,9 @@ local scene = composer.newScene( sceneName )
 local bkg_image
 local playButton
 local creditsButton
+local helpButton
+
+display.setStatusBar(display.HiddenStatusBar)
 
 
 -----------------------------------------------------------------------------------------
@@ -43,7 +46,7 @@ local creditsButton
 
 -- Creating Transition Function to Credits Page
 local function CreditsTransition( )       
-    composer.gotoScene( "credits_screen", {effect = "flipFadeOutIn", time = 500})
+    composer.gotoScene( "credits_screen", {effect = "slideDown", time = 1000})
 end 
 
 -----------------------------------------------------------------------------------------
@@ -143,7 +146,7 @@ function scene:create( event )
             overFile = "Images/HelpButtonPressed@2x.png",
 
             -- When the button is released, call the Credits transition function
-            onRelease = CreditsTransition
+           -- onRelease = CreditsTransition
         } ) 
 
     -----------------------------------------------------------------------------------------
@@ -151,6 +154,7 @@ function scene:create( event )
     -- Associating button widgets with this scene
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
+    sceneGroup:insert( helpButton )
     
     -- INSERT INSTRUCTIONS BUTTON INTO SCENE GROUP
 
