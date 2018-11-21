@@ -54,15 +54,17 @@ local character
 
 local heart1
 local heart2
+local heart3
 local numLives = 2
 
 local rArrow 
 local uArrow
+local lArrow
 
 local motionx = 0
 local SPEED = 5
-local LINEAR_VELOCITY = -100
-local GRAVITY = 7
+local LINEAR_VELOCITY = -150
+local GRAVITY = 8
 
 local leftW 
 local topW
@@ -70,6 +72,7 @@ local floor
 
 local ball1
 local ball2
+local ball3
 local theBall
 
 local questionsAnswered = 0
@@ -82,6 +85,11 @@ local questionsAnswered = 0
 local function right (touch)
     motionx = SPEED
     character.xScale = 1
+end
+
+local function left(touch)
+    motionx = SPEED
+    character.xScale = -1
 end
 
 -- When up arrow is touched, add vertical so it can jump
@@ -106,11 +114,13 @@ end
 
 local function AddArrowEventListeners()
     rArrow:addEventListener("touch", right)
+    lArrow:addEventListener("touch", left)
     uArrow:addEventListener("touch", up)
 end
 
 local function RemoveArrowEventListeners()
     rArrow:removeEventListener("touch", right)
+    lArrow:removeEventListener("touch", left)
     uArrow:removeEventListener("touch", up)
 end
 
@@ -152,11 +162,13 @@ end
 local function MakeSoccerBallsVisible()
     ball1.isVisible = true
     ball2.isVisible = true
+    ball3.isVisible = true
 end
 
 local function MakeHeartsVisible()
     heart1.isVisible = true
     heart2.isVisible = true
+    heart3.isVisible = true
 end
 
 local function YouLoseTransition()
@@ -192,21 +204,33 @@ local function onCollision( self, event )
             -- decrease number of lives
             numLives = numLives - 1
 
-            if (numLives == 1) then
+            if (numLives == 2) then
+                -- update hearts
+                heart1.isVisible = true
+                heart2.isVisible = true
+                heart3.isVisible = false
+                timer.performWithDelay(200, ReplaceCharacter) 
+
+            elseif (numLives == 1) then
                 -- update hearts
                 heart1.isVisible = true
                 heart2.isVisible = false
-                timer.performWithDelay(200, ReplaceCharacter) 
+                heart3.isVisible = false
+                timer.performWithDelay(200, ReplaceCharacter)
 
             elseif (numLives == 0) then
-                -- update hearts
+
                 heart1.isVisible = false
                 heart2.isVisible = false
+                heart3.isVisible = false
                 timer.performWithDelay(200, YouLoseTransition)
+
+
             end
         end
 
         if  (event.target.myName == "ball1") or
+            (event.target.myName == "ball3") or
             (event.target.myName == "ball2") then
 
             -- get the ball that the user hit
@@ -250,6 +274,9 @@ local function AddCollisionListeners()
     ball1:addEventListener( "collision" )
     ball2.collision = onCollision
     ball2:addEventListener( "collision" )
+    ball3.collision = onCollision
+    ball3:addEventListener( "collision" )
+
 
     door.collision = onCollision
     door:addEventListener( "collision" )
@@ -262,7 +289,7 @@ local function RemoveCollisionListeners()
 
     ball1:removeEventListener( "collision" )
     ball2:removeEventListener( "collision" )
-
+    ball3:removeEventListener( "collision" )
     door:removeEventListener( "collision")
 
 end
@@ -288,6 +315,7 @@ local function AddPhysicsBodies()
 
     physics.addBody(ball1, "static",  {density=0, friction=0, bounce=0} )
     physics.addBody(ball2, "static",  {density=0, friction=0, bounce=0} )
+    physics.addBody(ball3, "static",  {density=0, friction=0, bounce=0} )
 
     physics.addBody(door, "static", {density=1, friction=0.3, bounce=0.2})
 
@@ -447,6 +475,14 @@ function scene:create( event )
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( heart2 )
 
+    heart3 = display.newImageRect("Images/heart.png", 80, 80)
+    heart3.x = 210
+    heart3.y = 50
+    heart3.isVisible = true
+
+     -- Insert objects into the scene group in order to ONLY be associated with this scene
+    sceneGroup:insert( heart3 )
+
     --Insert the right arrow
     rArrow = display.newImageRect("Images/RightArrowUnpressed.png", 100, 50)
     rArrow.x = display.contentWidth * 9.2 / 10
@@ -459,6 +495,10 @@ function scene:create( event )
     uArrow = display.newImageRect("Images/UpArrowUnpressed.png", 50, 100)
     uArrow.x = display.contentWidth * 8.2 / 10
     uArrow.y = display.contentHeight * 8.5 / 10
+
+    lArrow = display.newImageRect("Images/RightArrowUnpressed.png", 100, 100)
+    lArrow.x = display.contentWidth * 9.2 / 10
+    lArrow.y = display.contentHeight * 9.5 / 10
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( uArrow)
