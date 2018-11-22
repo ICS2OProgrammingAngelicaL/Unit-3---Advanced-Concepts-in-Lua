@@ -495,13 +495,14 @@ function scene:create( event )
     uArrow = display.newImageRect("Images/UpArrowUnpressed.png", 50, 100)
     uArrow.x = display.contentWidth * 8.2 / 10
     uArrow.y = display.contentHeight * 8.5 / 10
+    sceneGroup:insert( uArrow)
 
     lArrow = display.newImageRect("Images/RightArrowUnpressed.png", 100, 100)
     lArrow.x = display.contentWidth * 9.2 / 10
     lArrow.y = display.contentHeight * 9.5 / 10
+    sceneGroup:insert( lArrow)
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
-    sceneGroup:insert( uArrow)
 
     --WALLS--
     leftW = display.newLine( 0, 0, 0, display.contentHeight)
@@ -547,6 +548,15 @@ function scene:create( event )
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
     sceneGroup:insert( ball2 )
+
+    --ball3
+    ball3 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
+    ball3.x = 490
+    ball3.y = 170
+    ball3.myName = "ball3"
+
+    -- Insert objects into the scene group in order to ONLY be associated with this scene
+    sceneGroup:insert( ball3 )
 
 end --function scene:create( event )
 
