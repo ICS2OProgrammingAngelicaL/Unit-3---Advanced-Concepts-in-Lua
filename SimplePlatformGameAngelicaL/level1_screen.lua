@@ -55,7 +55,7 @@ local character
 local heart1
 local heart2
 local heart3
-local numLives = 2
+local numLives = 3
 
 local rArrow 
 local uArrow
@@ -88,7 +88,7 @@ local function right (touch)
 end
 
 local function left(touch)
-    motionx = SPEED
+    motionx = SPEED - SPEED*2
     character.xScale = -1
 end
 
@@ -497,8 +497,8 @@ function scene:create( event )
     uArrow.y = display.contentHeight * 8.5 / 10
     sceneGroup:insert( uArrow)
 
-    lArrow = display.newImageRect("Images/RightArrowUnpressed.png", 100, 100)
-    lArrow.x = display.contentWidth * 9.2 / 10
+    lArrow = display.newImageRect("Images/LeftArrowUnpressed.png", 100, 50)
+    lArrow.x = display.contentWidth * 7.2 / 10
     lArrow.y = display.contentHeight * 9.5 / 10
     sceneGroup:insert( lArrow)
 
@@ -587,7 +587,7 @@ function scene:show( event )
         -- Insert code here to make the scene come alive.
         -- Example: start timers, begin animation, play audio, etc.
 
-        numLives = 2
+        numLives = 3
         questionsAnswered = 0
 
         -- make all soccer balls visible
