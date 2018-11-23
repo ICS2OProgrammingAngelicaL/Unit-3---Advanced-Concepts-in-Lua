@@ -67,6 +67,7 @@ local LINEAR_VELOCITY = -150
 local GRAVITY = 8
 
 local leftW 
+local rightW
 local topW
 local floor
 
@@ -175,6 +176,10 @@ local function YouLoseTransition()
     composer.gotoScene( "you_lose" )
 end
 
+local function YouWinTransition()
+    composer.gotoScene( "you_win" )
+end
+
 local function onCollision( self, event )
     -- for testing purposes
     --print( event.target )        --the first object in the collision
@@ -253,6 +258,7 @@ local function onCollision( self, event )
             --check to see if the user has answered 5 questions
             if (questionsAnswered == 3) then
                 -- after getting 3 questions right, go to the you win screen
+                YouWinTransition()
             end
         end        
 
@@ -310,6 +316,7 @@ local function AddPhysicsBodies()
     physics.addBody( spikes3platform, "static", { density=1.0, friction=0.3, bounce=0.2 } )
 
     physics.addBody(leftW, "static", {density=1, friction=0.3, bounce=0.2} )
+    physics.addBody(rightW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(topW, "static", {density=1, friction=0.3, bounce=0.2} )
     physics.addBody(floor, "static", {density=1, friction=0.3, bounce=0.2} )
 
@@ -336,6 +343,7 @@ local function RemovePhysicsBodies()
     physics.removeBody(spikes3platform)
 
     physics.removeBody(leftW)
+    physics.removeBody(rightW)
     physics.removeBody(topW)
     physics.removeBody(floor)
  
@@ -533,8 +541,8 @@ function scene:create( event )
 
     --ball1
     ball1 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball1.x = 610
-    ball1.y = 480
+    ball1.x = display.contentWidth*12/20
+    ball1.y = display.contentHeight*13/21
     ball1.myName = "ball1"
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
@@ -542,8 +550,8 @@ function scene:create( event )
 
     --ball2
     ball2 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball2.x = 490
-    ball2.y = 170
+    ball2.x = display.contentWidth*10/20
+    ball2.y = display.contentHeight*5/23
     ball2.myName = "ball2"
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
@@ -551,8 +559,8 @@ function scene:create( event )
 
     --ball3
     ball3 = display.newImageRect ("Images/SoccerBall.png", 70, 70)
-    ball3.x = 490
-    ball3.y = 170
+    ball3.x = display.contentWidth*18/20
+    ball3.y = display.contentHeight*4/23
     ball3.myName = "ball3"
 
     -- Insert objects into the scene group in order to ONLY be associated with this scene
